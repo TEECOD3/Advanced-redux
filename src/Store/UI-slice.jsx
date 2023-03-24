@@ -1,21 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-  cartModalOpen: false,
-};
-
 const UIslice = createSlice({
   name: "UiSlice",
-  initialState: initialState,
+  initialState: {
+    cartModal: false,
+  },
   reducers: {
-    openmodal: (state) => {
-      state.cartModalOpen = true;
-    },
-    closemodal: (state) => {
-      state.cartModalOpen = !state.cartModalOpen;
+    toggle(state) {
+      state.cartModal = !state.cartModal;
     },
   },
 });
 
 export const uiActions = UIslice.actions;
-export default UIslice.reducer;
+export default UIslice;

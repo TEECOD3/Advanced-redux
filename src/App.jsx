@@ -5,7 +5,7 @@ import Products from "./components/Shop/Product";
 import { useSelector } from "react-redux";
 
 function App() {
-  const cartstate = useSelector((state) => state.uiStore.cartModalOpen);
+  const cartstate = useSelector((state) => state.uiStore.cartModal);
   return (
     <Layout>
       {cartstate && <Cart />}
