@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialstate = {
   cartItems: [],
-  totalAmount: 0,
+  totalquantity: 0,
 };
 
 const cartslice = createSlice({
@@ -10,27 +10,35 @@ const cartslice = createSlice({
   initialState: initialstate,
   reducers: {
     addtocart: (state, action) => {
-      console.log(action.payload);
-      const updatedTotalAmount =
-        totalAmount + cartItems.price * cartItems.amount;
-      const exisitingItemIndex = state.cartItems.findIndex(
-        (item) => item.id === action.payload.id
+      state.totalquantity++;
+      const newItem = action.payload;
+      const existingItem = state.cartItems.find(
+        (item) => item.id === newItem.id
       );
-      const existingItem = state.cartItems.at(exisitingItemIndex);
-      let updatedItems;
-
-      if (existingItem) {
-        const updateditem = {
-          ...existingItem,
-          amount: existingItem.amount + action.payload.amount,
-        };
-        updatedItems = [...state.cartItems];
-        updatedItems[exisitingItemIndex] = updateditem;
+      if (!existingItem) {
+        state.cartItems.push({
+          id: newItem.id,
+          price: newItem.price,
+          quantity: 1,
+          totalprice: newItem.price,
+          name: newItem.title,
+        });
       } else {
-        updatedItems = cartItems.concat(action.payload);
+        existingItem.quantity++;
+        existingItem.totalprice = existingItem.totalprice + newItem.price;
       }
     },
-    removeFromCart: (state, action) => {},
+    removeFromCart: (state, action) => {
+      state.totalquantity--;
+      const id = action.payload;
+      const existingItem = state.cartItems.find((item) => item.id === id);
+      if (existingItem.quantity === 1) {
+        state.cartItems = state.cartItems.filter((item) => item.id !== id);
+      } else {
+        existingItem.quantity--;
+        existingItem.totalprice = existingItem.totalprice - existingItem.price;
+      }
+    },
     clearCart: () => {},
   },
 });

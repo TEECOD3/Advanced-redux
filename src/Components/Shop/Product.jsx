@@ -26,11 +26,6 @@ const dummyproduct = [
 //   }
 
 const Products = (props) => {
-  // const dispatch = useDispatch();
-
-  const additemHandler = () => {
-    // dispatch();
-  };
   return (
     <section className={classes.products}>
       <h2>Buy your favorite products</h2>
@@ -38,10 +33,10 @@ const Products = (props) => {
         {dummyproduct.map((product) => (
           <ProductItem
             key={product.id}
+            id={product.id}
             title={product.title}
             price={product.price}
             description={product.description}
-            AddItem={additemHandler}
           />
         ))}
       </ul>
