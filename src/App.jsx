@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Cart from "./Components/Cart/Cart";
-import Layout from "./components/Layout/Layout";
-import Products from "./components/Shop/Product";
+import Layout from "./Components/Layout/Layout";
+import Products from "./Components/Shop/Product";
 import { useSelector, useDispatch } from "react-redux";
 import { sendCartData } from "./Store/Cartslice";
 import Notification from "./Components/UI/Notification";
