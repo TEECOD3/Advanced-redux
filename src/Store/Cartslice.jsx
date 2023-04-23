@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { uiActions } from "./UI-slice";
 
 const initialstate = {
   cartItems: [],
@@ -42,6 +43,49 @@ const cartslice = createSlice({
     clearCart: () => {},
   },
 });
+
+export const sendCartData = (CartData) => {
+  return async (dispatch) => {
+    dispatch(
+      uiActions.setNotification({
+        status: "pending",
+        title: "currently pending",
+        message: "request is pending",
+      })
+    );
+    const sendrequest = async () => {
+      const response = await fetch(
+        "https://foodorderapp-d2403-default-rtdb.firebaseio.com/cart.json",
+        {
+          method: "PUT",
+          body: JSON.stringify(CartData),
+        }
+      );
+      if (!response.ok) {
+        throw new Error("request failed");
+      }
+    };
+
+    try {
+      await sendrequest();
+      dispatch(
+        uiActions.setNotification({
+          status: "success",
+          title: "currently sending",
+          message: "request was sucessfully sent",
+        })
+      );
+    } catch (error) {
+      dispatch(
+        uiActions.setNotification({
+          status: "error",
+          title: "failed ",
+          message: "request was not sucessful",
+        })
+      );
+    }
+  };
+};
 
 export const cartActions = cartslice.actions;
 export default cartslice.reducer;
