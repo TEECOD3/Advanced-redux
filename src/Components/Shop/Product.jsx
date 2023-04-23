@@ -4,7 +4,7 @@ import classes from "./Product.module.css";
 const dummyproduct = [
   {
     id: 1,
-    title: "body lotion",
+    title: "body lotions",
     price: 9,
     description: "epara that will make your skin sweet",
   },
@@ -15,13 +15,6 @@ const dummyproduct = [
     description: "cream that will make your hair sweet",
   },
 ];
-
-// {
-//     id: dummyproduct.id,
-//     title: dummyproduct.title,
-//     price: dummyproduct.price,
-//     amount: 1,
-//   }
 
 const Products = (props) => {
   return (
