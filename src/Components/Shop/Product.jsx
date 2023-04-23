@@ -1,7 +1,5 @@
 import ProductItem from "./ProductItem";
 import classes from "./Product.module.css";
-import { useSelector, useDispatch } from "react-redux";
-import { cartActions } from "../../Store/Cartslice";
 
 const dummyproduct = [
   {
